@@ -22,6 +22,11 @@ jobs:
           role-to-assume: arn:aws:iam::997784788462:role/GitHubActionsDracanus
           aws-region: us-east-2
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.5
+
       - name: Terraform Init (dev)
         working-directory: infra/envs/dev
         run: terraform init
@@ -30,4 +35,6 @@ jobs:
         if: github.ref == 'refs/heads/main'
         working-directory: infra/envs/dev
         run: terraform apply -auto-approve
+
+
 
